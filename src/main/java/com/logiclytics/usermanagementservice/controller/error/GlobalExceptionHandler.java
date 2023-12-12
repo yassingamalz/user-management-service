@@ -1,9 +1,6 @@
 package com.logiclytics.usermanagementservice.controller.error;
 
-import com.logiclytics.usermanagementservice.exception.DuplicateRoleException;
-import com.logiclytics.usermanagementservice.exception.DuplicateUserException;
-import com.logiclytics.usermanagementservice.exception.RoleNotFoundException;
-import com.logiclytics.usermanagementservice.exception.UserNotFoundException;
+import com.logiclytics.usermanagementservice.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -43,4 +40,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
 
+    @ExceptionHandler(UserRoleNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleUserRoleNotFoundException(UserRoleNotFoundException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicateUserRoleException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<String> handleDuplicateUserRoleException(DuplicateUserRoleException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
 }
