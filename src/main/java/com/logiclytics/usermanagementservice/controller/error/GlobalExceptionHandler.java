@@ -51,4 +51,16 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleDuplicateUserRoleException(DuplicateUserRoleException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
     }
+
+    @ExceptionHandler(PermissionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handlePermissionNotFoundException(PermissionNotFoundException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(DuplicatePermissionException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResponseEntity<String> handleDuplicatePermissionException(DuplicatePermissionException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.CONFLICT);
+    }
 }
